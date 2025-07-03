@@ -3,40 +3,271 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wintersmith.AI</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <title>Wintersmith.AI — AI Consulting & Deployment</title>
+  <meta name="description" content="Wintersmith.AI turns your AI ideas into production-ready solutions. From strategy & roadmap to deployment, expert AI consultancy tailored to your needs." />
+
+  <!-- JSON-LD Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Wintersmith.AI",
+    "url": "https://wintersmith.ai",
+    "logo": "https://wintersmith.ai/favicon-32.png",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "email": "pdf98-2023@yahoo.com",
+      "contactType": "customer support",
+      "url": "https://wintersmith.ai/#contact"
+    }]
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+
+  <!-- Tailwind CSS (built via Vite) -->
+  <link rel="stylesheet" href="/src/index.css" />
+
+  <!-- Critical CSS for above-the-fold -->
+  <style>
+    html, body { margin:0; padding:0; }
+  </style>
 </head>
 <body class="antialiased text-gray-800 relative">
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section
     id="hero"
     class="min-h-screen bg-gradient-to-b from-blue-300 to-blue-50
            flex flex-col items-center justify-center text-center px-6"
   >
-    <img src="/logo.svg" alt="Wintersmith.AI logo"
-         class="w-16 h-16 mb-6 opacity-0" data-animate />
-    <h1 class="text-4xl sm:text-6xl font-bold mb-4 opacity-0" data-animate>
+    <img
+      src="/logo.svg"
+      alt="Wintersmith.AI logo"
+      class="w-16 h-16 mb-6 opacity-0"
+      data-animate
+      loading="lazy"
+    />
+
+    <h1
+      class="text-4xl sm:text-6xl font-bold mb-4 opacity-0"
+      data-animate
+    >
       Harness AI—without the guesswork
     </h1>
-    <p class="max-w-xl text-lg mb-8 opacity-0" data-animate>
+
+    <p
+      class="max-w-xl text-lg mb-8 opacity-0"
+      data-animate
+    >
       From roadmap to deployment, Wintersmith.AI turns your ideas into production-ready AI products.
     </p>
-    <a href="#contact"
-       class="px-8 py-3 bg-blue-600 text-white rounded-full text-lg opacity-0"
-       data-animate>
+
+    <a
+      href="#contact"
+      class="btn-primary px-8 py-3 bg-blue-600 text-white rounded-full text-lg opacity-0"
+      data-animate
+    >
       Get Started
     </a>
-    <div class="absolute bottom-4 text-sm text-gray-500 opacity-0" data-animate>
+
+    <div
+      class="absolute bottom-4 text-sm text-gray-500 opacity-0"
+      data-animate
+    >
       ↓ scroll
     </div>
   </section>
 
-  <!-- Contact (to be built) -->
+  <!-- Contact Section -->
   <section id="contact" class="py-24 px-6 bg-blue-50">
-    <!-- form goes here -->
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Get Started</h2>
+
+      <form id="contact-form" class="space-y-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block font-medium mb-1">
+            Name<span class="text-red-500">*</span>
+          </label>
+          <input
+            id="name" name="name" type="text" required
+            class="w-full p-3 border rounded focus:outline-none focus:ring"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block font-medium mb-1">
+            Email<span class="text-red-500">*</span>
+          </label>
+          <input
+            id="email" name="email" type="email" required
+            class="w-full p-3 border rounded focus:outline-none focus:ring"
+          />
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label for="phone" class="block font-medium mb-1">
+            Phone Number<span class="text-red-500">*</span>
+          </label>
+          <input
+            id="phone" name="phone" type="tel" required
+            class="w-full p-3 border rounded focus:outline-none focus:ring"
+          />
+        </div>
+
+        <!-- AI Journey Slider -->
+        <div>
+          <label for="journey" class="block font-medium mb-1">
+            Where are you in your AI journey?<span class="text-red-500">*</span>
+          </label>
+          <input
+            id="journey" name="journey" type="range" min="0" max="3" value="0" required
+            class="w-full"
+            oninput="document.getElementById('journey-label').textContent = ['No idea','Some idea','Good idea','Clear idea'][this.value]"
+          />
+          <div id="journey-label" class="mt-1 text-gray-600">No idea</div>
+          <noscript>
+            <select name="journey" required class="w-full p-3 border rounded">
+              <option value="">Select…</option>
+              <option value="0">No idea</option>
+              <option value="1">Some idea</option>
+              <option value="2">Good idea</option>
+              <option value="3">Clear idea</option>
+            </select>
+          </noscript>
+        </div>
+
+        <!-- Referral -->
+        <div>
+          <label for="referral" class="block font-medium mb-1">
+            How did you hear about Wintersmith.AI?<span class="text-red-500">*</span>
+          </label>
+          <select id="referral" name="referral" required class="w-full p-3 border rounded">
+            <option value="">Choose…</option>
+            <option>Google search</option>
+            <option>LinkedIn</option>
+            <option>Friend referral</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <!-- Industry & Position -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="industry" class="block font-medium mb-1">
+              Industry<span class="text-red-500">*</span>
+            </label>
+            <input
+              id="industry" name="industry" type="text" required
+              class="w-full p-3 border rounded focus:outline-none focus:ring"
+            />
+          </div>
+          <div>
+            <label for="position" class="block font-medium mb-1">
+              Position<span class="text-red-500">*</span>
+            </label>
+            <input
+              id="position" name="position" type="text" required
+              class="w-full p-3 border rounded focus:outline-none focus:ring"
+            />
+          </div>
+        </div>
+
+        <!-- Services Checkboxes -->
+        <fieldset>
+          <legend class="font-medium mb-2">
+            AI services you’re interested in<span class="text-red-500">*</span>
+          </legend>
+          <div class="space-y-2">
+            <label><input type="checkbox" name="services" value="Strategy & Roadmap Creation" required /> Strategy & Roadmap Creation</label><br/>
+            <label><input type="checkbox" name="services" value="Use Case Ideation & Brainstorming" /> Use Case Ideation & Brainstorming</label><br/>
+            <label><input type="checkbox" name="services" value="Proof-of-Concept & Validation" /> Proof-of-Concept & Validation</label><br/>
+            <label><input type="checkbox" name="services" value="Detailed Project Planning" /> Detailed Project Planning</label><br/>
+            <label><input type="checkbox" name="services" value="Project Implementation" /> Project Implementation</label><br/>
+            <label><input type="checkbox" name="services" value="Deployment to Production" /> Deployment to Production</label>
+          </div>
+        </fieldset>
+
+        <!-- Additional Comments -->
+        <div>
+          <label for="comments" class="block font-medium mb-1">
+            Additional comments
+          </label>
+          <textarea
+            id="comments" name="comments" rows="4"
+            class="w-full p-3 border rounded focus:outline-none focus:ring"
+          ></textarea>
+        </div>
+
+        <!-- reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="6Leqp3UrAAAAALYHpMDuMO98VhtUGFB9Dqvk-3Ah"></div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
+        >
+          Submit
+        </button>
+      </form>
+
+      <div id="form-success" class="mt-6 hidden text-center text-green-700 font-semibold">
+        Thank you. Someone from Wintersmith.AI will reach out to you shortly.
+      </div>
+    </div>
   </section>
 
+  <!-- reCAPTCHA API -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <!-- Vite & JS entry -->
   <script type="module" src="/src/main.js"></script>
+
+  <!-- Form submission logic -->
+  <script>
+    const form = document.getElementById('contact-form')
+    const successMsg = document.getElementById('form-success')
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault()
+
+      const token = grecaptcha.getResponse()
+      if (!token) {
+        alert('Please verify you are human')
+        return
+      }
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        journey: form.journey.value,
+        referral: form.referral.value,
+        industry: form.industry.value,
+        position: form.position.value,
+        services: Array.from(form.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value),
+        comments: form.comments.value,
+        token
+      }
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+
+      if (res.ok) {
+        form.classList.add('hidden')
+        successMsg.classList.remove('hidden')
+      } else {
+        const err = await res.json()
+        alert(err.error || 'Submission failed')
+      }
+    })
+  </script>
 </body>
 </html>
