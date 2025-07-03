@@ -2,11 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling for in-page anchors */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Fade-in animation */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
+}
+
+/* Reusable button component */
+@layer components {
+  .btn-primary {
+    @apply inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold
+           rounded-full px-8 py-3 transition;
+  }
+}
+
+/* Utility backgrounds */
+@layer utilities {
+  /* Subtle repeating snowflake */
+  .bg-snowflake {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='%231e63d2' stroke-opacity='0.1' stroke-width='1' stroke-linecap='round'%3E%3Cline x1='16' y1='0' x2='16' y2='32'/%3E%3Cline x1='0' y1='16' x2='32' y2='16'/%3E%3Cline x1='5' y1='5' x2='27' y2='27'/%3E%3Cline x1='27' y1='5' x2='5' y2='27'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 32px 32px;
+  }
+
+  /* Hero background: snowflake + gradient */
+  .bg-hero-snow {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='%231e63d2' stroke-opacity='0.1' stroke-width='1' stroke-linecap='round'%3E%3Cline x1='16' y1='0' x2='16' y2='32'/%3E%3Cline x1='0' y1='16' x2='32' y2='16'/%3E%3Cline x1='5' y1='5' x2='27' y2='27'/%3E%3Cline x1='27' y1='5' x2='5' y2='27'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(to bottom, #93C5FD, #EFF6FF);
+    background-repeat: repeat, no-repeat;
+    background-size: 32px 32px, cover;
+  }
+
+  /* Full–page gradient (extends down the entire document) + optional snowflake tile */
+  .bg-page {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='%231e63d2' stroke-opacity='0.1' stroke-width='1' stroke-linecap='round'%3E%3Cline x1='16' y1='0' x2='16' y2='32'/%3E%3Cline x1='0' y1='16' x2='32' y2='16'/%3E%3Cline x1='5' y1='5' x2='27' y2='27'/%3E%3Cline x1='27' y1='5' x2='5' y2='27'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(to bottom, #93C5FD, #EFF6FF);
+    background-repeat: repeat, no-repeat;
+    background-size: 32px 32px, cover;
+    background-attachment: scroll, fixed;
+  }
+
+  /* A lightly frosted-white section, so gradient shows through */
+  .bg-section-light {
+    background-color: rgba(255,255,255,0.30);
+  }
+  /* A lightly frosted-blue section, so gradient shows through */
+  .bg-section-blue {
+    background-color: rgba(240,249,255,0.30); /* your bg-blue-50 at 85% */
+  }
 }
