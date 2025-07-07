@@ -447,38 +447,58 @@
       updateServiceCheckboxes(slider.value);
     });
   </script>
-
-  <!-- Existing form-submission script -->
+  <!-- Updated Form‐Submission Script -->
   <script>
-    const form = document.getElementById('contact-form');
+    const form      = document.getElementById('contact-form');
     const successMsg = document.getElementById('form-success');
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
+
+      // 1️⃣ reCAPTCHA
       const token = grecaptcha.getResponse();
       if (!token) return alert('Please verify you are human');
+
+      // 2️⃣ Gather all fields
+      const fd = new FormData(form);
+      const services = fd.getAll('services');
+      if (services.length === 0) {
+        return alert('Please select at least one AI service');
+      }
+
+      // 3️⃣ Build payload
       const data = {
-        name: form.name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        journey: form.journey.value,
-        referral: form.referral.value,
-        industry: form.industry.value,
-        position: form.position.value,
-        services: Array.from(form.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value),
-        comments: form.comments.value,
+        name:     fd.get('name')     || '',
+        email:    fd.get('email')    || '',
+        phone:    fd.get('phone')    || '',
+        journey:  fd.get('journey')  || '',
+        referral: fd.get('referral') || '',
+        industry: fd.get('industry') || '',
+        position: fd.get('position') || '',
+        services,
+        comments: fd.get('comments') || '',
         token
       };
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(data)
-      });
-      if (res.ok) {
-        form.closest('section').querySelector('div[role="alert"]').classList.remove('hidden');
-        successMsg.focus();
-      } else {
-        const err = await res.json();
-        alert(err.error||'Submission failed');
+
+      // 4️⃣ Send to backend
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          form.reset();
+          grecaptcha.reset();
+          successMsg.classList.remove('hidden');
+          successMsg.focus();
+        } else {
+          const err = await res.json();
+          alert(err.error || 'Submission failed');
+        }
+      } catch(err) {
+        console.error(err);
+        alert('Network error, please try again');
       }
     });
   </script>
