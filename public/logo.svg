@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 800 180"
      width="800" height="180"
+     viewBox="0 0 800 180"
      preserveAspectRatio="xMidYMid meet">
 
   <defs>
-    <!-- Vertical gradient for the snowflake -->
-    <linearGradient id="flakeGradient"
-                    x1="0" y1="-80"
-                    x2="0" y2="80"
-                    gradientUnits="userSpaceOnUse">
+    <!-- Gradient for the snowflake strokes -->
+    <linearGradient id="flakeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#27B3FC"/>
       <stop offset="100%" stop-color="#22A0E0"/>
     </linearGradient>
-
-    <!-- Single arm of the snowflake, using gradient stroke -->
-    <g id="flakeArm" stroke="url(#flakeGradient)" stroke-width="6" stroke-linecap="round">
-      <!-- Main vertical shaft -->
-      <line x1="0" y1="-60" x2="0" y2="60" />
-      <!-- Upper branches -->
-      <line x1="0" y1="-60" x2="12" y2="-80" />
-      <line x1="0" y1="-60" x2="-12" y2="-80" />
-      <!-- Lower branches -->
-      <line x1="0" y1="60"  x2="12" y2="80"  />
-      <line x1="0" y1="60"  x2="-12" y2="80"  />
-      <!-- Mid-shaft branches -->
-      <line x1="0" y1="-20" x2="12" y2="-35" />
-      <line x1="0" y1="-20" x2="-12" y2="-35" />
-      <line x1="0" y1="20"  x2="12" y2="35"  />
-      <line x1="0" y1="20"  x2="-12" y2="35"  />
-    </g>
   </defs>
 
-  <!-- Assemble full snowflake via rotated copies of the arm -->
+  <!-- Snowflake centered at (120,90) -->
   <g transform="translate(120,90)">
-    <use href="#flakeArm" />
-    <use href="#flakeArm" transform="rotate(60)" />
-    <use href="#flakeArm" transform="rotate(120)" />
-    <use href="#flakeArm" transform="rotate(180)" />
-    <use href="#flakeArm" transform="rotate(240)" />
-    <use href="#flakeArm" transform="rotate(300)" />
+    <!-- One arm definition -->
+    <g id="flakeArm"
+       stroke="url(#flakeGradient)"
+       stroke-width="12"
+       stroke-linecap="round"
+       fill="none">
+      <!-- Main shaft -->
+      <line x1="0" y1="-70" x2="0" y2="70"/>
+
+      <!-- Near‐tip branches -->
+      <line x1="0"  y1="-65" x2="15"  y2="-85"/>
+      <line x1="0"  y1="-65" x2="-15" y2="-85"/>
+
+      <!-- Upper mid‐shaft branches -->
+      <line x1="0"  y1="-30" x2="15"  y2="-50"/>
+      <line x1="0"  y1="-30" x2="-15" y2="-50"/>
+
+      <!-- Lower mid‐shaft branches -->
+      <line x1="0"  y1="30"  x2="15"  y2="50"/>
+      <line x1="0"  y1="30"  x2="-15" y2="50"/>
+
+      <!-- Near‐base branches -->
+      <line x1="0"  y1="65"  x2="15"  y2="85"/>
+      <line x1="0"  y1="65"  x2="-15" y2="85"/>
+    </g>
+
+    <!-- Assemble the full snowflake by rotating the arm -->
+    <use href="#flakeArm" transform="rotate(0)"/>
+    <use href="#flakeArm" transform="rotate(60)"/>
+    <use href="#flakeArm" transform="rotate(120)"/>
+    <use href="#flakeArm" transform="rotate(180)"/>
+    <use href="#flakeArm" transform="rotate(240)"/>
+    <use href="#flakeArm" transform="rotate(300)"/>
   </g>
 
-  <!-- Wordmark in white, with .AI uppercase -->
-  <text x="220" y="155"
+  <!-- Wordmark -->
+  <text x="260" y="115"
         font-family="Montserrat, sans-serif"
         font-size="64"
-        font-weight="700"
+        font-weight="600"
         fill="#FFFFFF"
         letter-spacing="0.5">
     Wintersmith.AI

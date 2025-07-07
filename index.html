@@ -54,6 +54,26 @@
   <style>html,body{margin:0;padding:0;scroll-behavior:smooth;}</style>
 </head>
 <body class="bg-page antialiased text-gray-800 relative">
+  <!-- Sticky Header Navigation -->
+  <header class="sticky inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.svg" alt="Wintersmith.AI logo" class="h-8">
+        <span class="text-2xl font-bold text-gray-800">Wintersmith.AI</span>
+      </a>
+      <!-- Nav Links -->
+      <nav class="space-x-6 text-gray-700">
+        <a href="#hero"         class="hover:text-blue-600">Home</a>
+        <a href="#why"          class="hover:text-blue-600">Why</a>
+        <a href="#features"     class="hover:text-blue-600">Features</a>
+        <a href="#testimonials" class="hover:text-blue-600">Stories</a>
+        <a href="#contact"      class="hover:text-blue-600">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- then your existing main… -->
   <main>
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex flex-col items-center justify-center pt-24 px-6">
@@ -258,7 +278,7 @@
               </legend>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <label class="flex items-center">
-                  <input type="checkbox" name="services" value="Strategy & Roadmap Creation" required class="mr-2">
+                  <input type="checkbox" name="services" value="Strategy & Roadmap Creation" class="mr-2">
                   Strategy & Roadmap Creation
                 </label>
                 <label class="flex items-center">
