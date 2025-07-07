@@ -4,10 +4,19 @@
      width="800" height="180"
      preserveAspectRatio="xMidYMid meet">
 
-  <!-- Define a single snowflake arm -->
   <defs>
-    <g id="flakeArm" stroke="#1e63d2" stroke-width="6" stroke-linecap="round">
-      <!-- Main shaft -->
+    <!-- Vertical gradient for the snowflake -->
+    <linearGradient id="flakeGradient"
+                    x1="0" y1="-80"
+                    x2="0" y2="80"
+                    gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#27B3FC"/>
+      <stop offset="100%" stop-color="#22A0E0"/>
+    </linearGradient>
+
+    <!-- Single arm of the snowflake, using gradient stroke -->
+    <g id="flakeArm" stroke="url(#flakeGradient)" stroke-width="6" stroke-linecap="round">
+      <!-- Main vertical shaft -->
       <line x1="0" y1="-60" x2="0" y2="60" />
       <!-- Upper branches -->
       <line x1="0" y1="-60" x2="12" y2="-80" />
@@ -23,7 +32,7 @@
     </g>
   </defs>
 
-  <!-- Snowflake: place six arms rotated around center -->
+  <!-- Assemble full snowflake via rotated copies of the arm -->
   <g transform="translate(120,90)">
     <use href="#flakeArm" />
     <use href="#flakeArm" transform="rotate(60)" />
@@ -33,13 +42,13 @@
     <use href="#flakeArm" transform="rotate(300)" />
   </g>
 
-  <!-- Wordmark -->
+  <!-- Wordmark in white, with .AI uppercase -->
   <text x="220" y="155"
         font-family="Montserrat, sans-serif"
         font-size="64"
         font-weight="700"
-        fill="#0e2749"
+        fill="#FFFFFF"
         letter-spacing="0.5">
-    Wintersmith.ai
+    Wintersmith.AI
   </text>
 </svg>

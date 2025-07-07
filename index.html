@@ -79,8 +79,8 @@
         </div>
         <div class="bg-blue-50 p-6 rounded-xl shadow hover:shadow-lg transition">
           <div class="w-12 h-12 mb-4 mx-auto text-blue-600"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3 5 5 .5-3.5 4 1 5-4.5-2.5L8 16l1-5L5.5 7 11 6.5z"/></svg></div>
-          <h3 class="font-semibold mb-2">Battle‑tested Stack</h3>
-          <p class="text-sm text-gray-600">Best‑practice MLOps and secure deployments.</p>
+          <h3 class="font-semibold mb-2">Battle-tested Stack</h3>
+          <p class="text-sm text-gray-600">Best-practice MLOps and secure deployments.</p>
         </div>
         <div class="bg-blue-50 p-6 rounded-xl shadow hover:shadow-lg transition">
           <div class="w-12 h-12 mb-4 mx-auto text-blue-600"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></div>
@@ -90,7 +90,7 @@
         <div class="bg-blue-50 p-6 rounded-xl shadow hover:shadow-lg transition">
           <div class="w-12 h-12 mb-4 mx-auto text-blue-600"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg></div>
           <h3 class="font-semibold mb-2">Full Lifecycle</h3>
-          <p class="text-sm text-gray-600">Roadmap, build, deploy & scale—covered end‑to‑end.</p>
+          <p class="text-sm text-gray-600">Roadmap, build, deploy & scale—covered end-to-end.</p>
         </div>
       </div>
     </section>
@@ -144,7 +144,7 @@
           </figure>
           <figure class="bg-white rounded-xl p-6 shadow w-80 shrink-0">
             <blockquote class="text-gray-700 italic mb-4">“From prototype to prod in six weeks—unreal!”</blockquote>
-            <figcaption class="text-sm font-semibold text-blue-600">— Elena M., e‑Com Founder</figcaption>
+            <figcaption class="text-sm font-semibold text-blue-600">— Elena M., e-Com Founder</figcaption>
           </figure>
         </div>
       </div>
@@ -160,6 +160,7 @@
         </a>
       </div>
     </section>
+
     <!-- Contact Section -->
     <section id="contact" class="bg-section-blue py-24 px-6">
       <div class="max-w-3xl mx-auto opacity-0" data-animate>
@@ -188,17 +189,6 @@
               />
             </div>
 
-            <!-- Phone -->
-            <div>
-              <label for="phone" class="block font-medium mb-1">
-                Phone Number<span class="text-red-500">*</span>
-              </label>
-              <input
-                id="phone" name="phone" type="tel" required
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
-              />
-            </div>
-
             <!-- Journey Slider -->
             <div>
               <label for="journey" class="block font-medium mb-1">
@@ -208,7 +198,6 @@
                 <input
                   id="journey" name="journey" type="range" min="0" max="3" value="0" required
                   class="flex-1"
-                  oninput="document.getElementById('journey-label').textContent=['No idea','Some idea','Good idea','Clear idea'][this.value]"
                 />
                 <span id="journey-label" class="w-32 text-gray-600">No idea</span>
               </div>
@@ -327,6 +316,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="py-6 bg-white text-center text-sm text-gray-500">&copy; 2025 Wintersmith.AI. All rights reserved.</footer>
@@ -334,6 +324,55 @@
   <!-- Scripts -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script type="module" src="/src/main.js"></script>
+
+  <!-- Slider → Checkbox Sync Script -->
+  <script>
+    // map slider value → which services should be checked
+    const journeyMap = {
+      0: [
+        "Strategy & Roadmap Creation",
+        "Use Case Ideation & Brainstorming"
+      ],
+      1: [
+        "Strategy & Roadmap Creation",
+        "Proof-of-Concept & Validation"
+      ],
+      2: [
+        "Strategy & Roadmap Creation",
+        "Detailed Project Planning",
+        "Project Implementation"
+      ],
+      3: [
+        "Project Implementation",
+        "Deployment to Production"
+      ]
+    };
+
+    function updateServiceCheckboxes(val) {
+      const toCheck = journeyMap[val] || [];
+      document.querySelectorAll('input[name="services"]').forEach(cb => {
+        cb.checked = toCheck.includes(cb.value);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const slider = document.getElementById('journey');
+      const label = document.getElementById('journey-label');
+      const labels = ['No idea','Some idea','Good idea','Clear idea'];
+
+      // on slider move, update label + checkboxes
+      slider.addEventListener('input', () => {
+        label.textContent = labels[slider.value];
+        updateServiceCheckboxes(slider.value);
+      });
+
+      // initialize on load
+      label.textContent = labels[slider.value];
+      updateServiceCheckboxes(slider.value);
+    });
+  </script>
+
+  <!-- Existing form-submission script -->
   <script>
     const form = document.getElementById('contact-form');
     const successMsg = document.getElementById('form-success');
@@ -353,7 +392,11 @@
         comments: form.comments.value,
         token
       };
-      const res = await fetch('/api/contact', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
       if (res.ok) {
         form.closest('section').querySelector('div[role="alert"]').classList.remove('hidden');
         successMsg.focus();
